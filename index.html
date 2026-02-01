@@ -930,6 +930,61 @@
             opacity: 0.7;
         }
 
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4), 0 8px 24px rgba(0,0,0,0.2);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5), 0 12px 32px rgba(0,0,0,0.25);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        /* Language Toggle Button */
+        .lang-toggle {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lang-toggle:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .lang-toggle .lang-icon {
+            font-size: 1.1rem;
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
             .header-content {
@@ -986,7 +1041,89 @@
             }
 
             .modal-content {
-                padding: 2rem;
+                padding: 1.5rem;
+                margin: 1rem;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .modal-content h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .modal {
+                padding: 0.5rem;
+                align-items: flex-start;
+                padding-top: 2rem;
+            }
+
+            .form-group {
+                margin-bottom: 1rem;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.85rem;
+                font-size: 16px; /* Prevents iOS zoom on focus */
+            }
+
+            .form-submit {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            .modal-close {
+                top: 1rem;
+                right: 1rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.3rem;
+            }
+
+            .lang-toggle {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .whatsapp-float svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 1.25rem;
+                border-radius: 16px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.75rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+            }
+
+            nav a {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -1006,11 +1143,12 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#why-us">Why Us</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#" class="cta-nav" onclick="openModal(event)">Register Now</a></li>
+                    <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
+                    <li><a href="#why-us" data-i18n="nav_why_us">Why Us</a></li>
+                    <li><a href="#gallery" data-i18n="nav_gallery">Gallery</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="#" class="cta-nav" onclick="openModal(event)" data-i18n="nav_register">Register Now</a></li>
+                    <li><button class="lang-toggle" onclick="toggleLanguage()"><span class="lang-icon">🌐</span> <span id="langLabel">AF</span></button></li>
                 </ul>
             </nav>
         </div>
@@ -1020,48 +1158,48 @@
         <div class="hero-content">
             <div class="hero-text">
                 <div class="location-badge">
-                    <span>📍</span> Now in Stellenbosch, Western Cape!
+                    <span>📍</span> <span data-i18n="hero_location">Now in Stellenbosch, Western Cape!</span>
                 </div>
                 <h2>
-                    After-School LEGO Robotics
-                    <span class="highlight">That Kids Actually Love</span>
+                    <span data-i18n="hero_title_1">After-School LEGO Robotics</span>
+                    <span class="highlight" data-i18n="hero_title_2">That Kids Actually Love</span>
                 </h2>
-                <p class="subtitle">Transform your child's after-school hours into exciting hands-on learning adventures with coding, robotics, and problem-solving.</p>
-                
+                <p class="subtitle" data-i18n="hero_subtitle">Transform your child's after-school hours into exciting hands-on learning adventures with coding, robotics, and problem-solving.</p>
+
                 <div class="hero-features">
                     <div class="hero-feature">
                         <span>🎒</span>
                         <div>
-                            <strong>After-School Classes</strong><br>
-                            <small>Convenient timing for parents</small>
+                            <strong data-i18n="hero_feature_1_title">After-School Classes</strong><br>
+                            <small data-i18n="hero_feature_1_desc">Convenient timing for parents</small>
                         </div>
                     </div>
                     <div class="hero-feature">
                         <span>👨‍🏫</span>
                         <div>
-                            <strong>Expert Instructors</strong><br>
-                            <small>Passionate & qualified teachers</small>
+                            <strong data-i18n="hero_feature_2_title">Expert Instructors</strong><br>
+                            <small data-i18n="hero_feature_2_desc">Passionate & qualified teachers</small>
                         </div>
                     </div>
                     <div class="hero-feature">
                         <span>🏆</span>
                         <div>
-                            <strong>Competition Ready</strong><br>
-                            <small>Train for robotics tournaments</small>
+                            <strong data-i18n="hero_feature_3_title">Competition Ready</strong><br>
+                            <small data-i18n="hero_feature_3_desc">Train for robotics tournaments</small>
                         </div>
                     </div>
                     <div class="hero-feature">
                         <span>🎓</span>
                         <div>
-                            <strong>Ages 8-16</strong><br>
-                            <small>Beginner to advanced levels</small>
+                            <strong data-i18n="hero_feature_4_title">Ages 8-16</strong><br>
+                            <small data-i18n="hero_feature_4_desc">Beginner to advanced levels</small>
                         </div>
                     </div>
                 </div>
 
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary" onclick="openModal(event)">Register Your Child</a>
-                    <a href="#pricing" class="btn btn-secondary">View Pricing</a>
+                    <a href="#" class="btn btn-primary" onclick="openModal(event)" data-i18n="hero_cta_register">Register Your Child</a>
+                    <a href="#pricing" class="btn btn-secondary" data-i18n="hero_cta_pricing">View Pricing</a>
                 </div>
             </div>
             
@@ -1081,69 +1219,69 @@
 
     <section class="pricing" id="pricing">
         <div class="section-title">
-            <h2>Choose Your Program</h2>
-            <p>Flexible pricing for every budget • Pay monthly or save with term rates</p>
+            <h2 data-i18n="pricing_title">Choose Your Program</h2>
+            <p data-i18n="pricing_subtitle">Flexible pricing for every budget • Pay monthly or save with term rates</p>
         </div>
-        
+
         <div class="pricing-grid">
             <div class="pricing-card">
                 <div class="pricing-icon">🚀</div>
-                <h3>Beginner Robotics</h3>
+                <h3 data-i18n="pricing_beginner_title">Beginner Robotics</h3>
                 <div class="price">R750<small>/month</small></div>
-                <span class="price-period">or R2,000 per term (3 months)</span>
-                
+                <span class="price-period" data-i18n="pricing_beginner_term">or R2,000 per term (3 months)</span>
+
                 <ul class="features-list">
-                    <li>2 hours per week</li>
-                    <li>Ages 8-11</li>
-                    <li>Basic programming</li>
+                    <li data-i18n="pricing_beginner_f1">2 hours per week</li>
+                    <li data-i18n="pricing_beginner_f2">Ages 8-11</li>
+                    <li data-i18n="pricing_beginner_f3">Basic programming</li>
                     <li>LEGO SPIKE Essential</li>
-                    <li>Team projects</li>
-                    <li>Max 8 students per class</li>
-                    <li>All equipment included</li>
+                    <li data-i18n="pricing_beginner_f5">Team projects</li>
+                    <li data-i18n="pricing_beginner_f6">Max 8 students per class</li>
+                    <li data-i18n="pricing_beginner_f7">All equipment included</li>
                 </ul>
-                
-                <button class="btn btn-primary" onclick="openModal(event, 'Beginner Robotics')">Register Now</button>
+
+                <button class="btn btn-primary" onclick="openModal(event, 'Beginner Robotics')" data-i18n="pricing_register">Register Now</button>
             </div>
 
             <div class="pricing-card featured">
-                <span class="featured-badge">POPULAR</span>
+                <span class="featured-badge" data-i18n="pricing_popular">POPULAR</span>
                 <div class="pricing-icon">🤖</div>
-                <h3>Advanced Robotics</h3>
+                <h3 data-i18n="pricing_advanced_title">Advanced Robotics</h3>
                 <div class="price">R950<small>/month</small></div>
-                <span class="price-period">or R2,500 per term (3 months)</span>
-                
+                <span class="price-period" data-i18n="pricing_advanced_term">or R2,500 per term (3 months)</span>
+
                 <ul class="features-list">
-                    <li>2.5 hours per week</li>
-                    <li>Ages 12-16</li>
-                    <li>Advanced coding (Python)</li>
+                    <li data-i18n="pricing_advanced_f1">2.5 hours per week</li>
+                    <li data-i18n="pricing_advanced_f2">Ages 12-16</li>
+                    <li data-i18n="pricing_advanced_f3">Advanced coding (Python)</li>
                     <li>LEGO SPIKE Prime</li>
-                    <li>Sensors & automation</li>
-                    <li>Competition prep</li>
-                    <li>Project portfolio</li>
-                    <li>Max 6 students per class</li>
+                    <li data-i18n="pricing_advanced_f5">Sensors & automation</li>
+                    <li data-i18n="pricing_advanced_f6">Competition prep</li>
+                    <li data-i18n="pricing_advanced_f7">Project portfolio</li>
+                    <li data-i18n="pricing_advanced_f8">Max 6 students per class</li>
                 </ul>
-                
-                <button class="btn btn-primary" onclick="openModal(event, 'Advanced Robotics')">Register Now</button>
+
+                <button class="btn btn-primary" onclick="openModal(event, 'Advanced Robotics')" data-i18n="pricing_register">Register Now</button>
             </div>
 
             <div class="pricing-card">
                 <div class="pricing-icon">🏆</div>
-                <h3>Competition Team</h3>
+                <h3 data-i18n="pricing_competition_title">Competition Team</h3>
                 <div class="price">R1,200<small>/month</small></div>
-                <span class="price-period">or R3,200 per term (3 months)</span>
-                
+                <span class="price-period" data-i18n="pricing_competition_term">or R3,200 per term (3 months)</span>
+
                 <ul class="features-list">
-                    <li>3 hours per week</li>
-                    <li>All ages (by assessment)</li>
-                    <li>Tournament training</li>
+                    <li data-i18n="pricing_competition_f1">3 hours per week</li>
+                    <li data-i18n="pricing_competition_f2">All ages (by assessment)</li>
+                    <li data-i18n="pricing_competition_f3">Tournament training</li>
                     <li>FIRST LEGO League</li>
-                    <li>Presentation skills</li>
-                    <li>Team building</li>
-                    <li>Competition fees included</li>
-                    <li>Weekend sessions available</li>
+                    <li data-i18n="pricing_competition_f5">Presentation skills</li>
+                    <li data-i18n="pricing_competition_f6">Team building</li>
+                    <li data-i18n="pricing_competition_f7">Competition fees included</li>
+                    <li data-i18n="pricing_competition_f8">Weekend sessions available</li>
                 </ul>
-                
-                <button class="btn btn-primary" onclick="openModal(event, 'Competition Team')">Join Team</button>
+
+                <button class="btn btn-primary" onclick="openModal(event, 'Competition Team')" data-i18n="pricing_join">Join Team</button>
             </div>
         </div>
     </section>
@@ -1151,45 +1289,45 @@
     <section class="why-choose" id="why-us">
         <div class="why-choose-content">
             <div class="section-title light">
-                <h2>Why Parents Choose DCJ Training</h2>
-                <p>More than just robotics—we build confidence, creativity, and critical thinking</p>
+                <h2 data-i18n="why_title">Why Parents Choose DCJ Training</h2>
+                <p data-i18n="why_subtitle">More than just robotics—we build confidence, creativity, and critical thinking</p>
             </div>
 
             <div class="benefits-grid">
                 <div class="benefit-item">
                     <div class="benefit-icon">🎯</div>
-                    <h3>Proven Results</h3>
-                    <p>Our students consistently place in regional competitions and develop real-world STEM skills</p>
+                    <h3 data-i18n="why_b1_title">Proven Results</h3>
+                    <p data-i18n="why_b1_desc">Our students consistently place in regional competitions and develop real-world STEM skills</p>
                 </div>
 
                 <div class="benefit-item">
                     <div class="benefit-icon">👨‍👩‍👧‍👦</div>
-                    <h3>Small Class Sizes</h3>
-                    <p>Maximum 8 students per instructor ensures personalized attention and hands-on learning</p>
+                    <h3 data-i18n="why_b2_title">Small Class Sizes</h3>
+                    <p data-i18n="why_b2_desc">Maximum 8 students per instructor ensures personalized attention and hands-on learning</p>
                 </div>
 
                 <div class="benefit-item">
                     <div class="benefit-icon">🔧</div>
-                    <h3>Professional Equipment</h3>
-                    <p>Latest LEGO Education kits including SPIKE Prime and Mindstorms EV3</p>
+                    <h3 data-i18n="why_b3_title">Professional Equipment</h3>
+                    <p data-i18n="why_b3_desc">Latest LEGO Education kits including SPIKE Prime and Mindstorms EV3</p>
                 </div>
 
                 <div class="benefit-item">
                     <div class="benefit-icon">📅</div>
-                    <h3>Flexible Scheduling</h3>
-                    <p>Multiple after-school time slots to fit your family's busy schedule</p>
+                    <h3 data-i18n="why_b4_title">Flexible Scheduling</h3>
+                    <p data-i18n="why_b4_desc">Multiple after-school time slots to fit your family's busy schedule</p>
                 </div>
 
                 <div class="benefit-item">
                     <div class="benefit-icon">🎓</div>
-                    <h3>Qualified Instructors</h3>
-                    <p>Teachers with STEM backgrounds and passion for youth development</p>
+                    <h3 data-i18n="why_b5_title">Qualified Instructors</h3>
+                    <p data-i18n="why_b5_desc">Teachers with STEM backgrounds and passion for youth development</p>
                 </div>
 
                 <div class="benefit-item">
                     <div class="benefit-icon">💡</div>
-                    <h3>Project-Based Learning</h3>
-                    <p>Students create real projects they're proud of, not just follow instructions</p>
+                    <h3 data-i18n="why_b6_title">Project-Based Learning</h3>
+                    <p data-i18n="why_b6_desc">Students create real projects they're proud of, not just follow instructions</p>
                 </div>
             </div>
         </div>
@@ -1199,8 +1337,8 @@
     <section class="video-gallery" id="gallery">
         <div class="video-gallery-content">
             <div class="section-title">
-                <h2>See Our Students in Action</h2>
-                <p>Watch our young robotics enthusiasts learn, build, and compete</p>
+                <h2 data-i18n="gallery_title">See Our Students in Action</h2>
+                <p data-i18n="gallery_subtitle">Watch our young robotics enthusiasts learn, build, and compete</p>
             </div>
 
             <div class="video-grid">
@@ -1295,8 +1433,8 @@
 
             <!-- Photo Gallery -->
             <div class="section-title" style="margin-top: 4rem;">
-                <h2>Photo Gallery</h2>
-                <p>Snapshots from our robotics classes</p>
+                <h2 data-i18n="photos_title">Photo Gallery</h2>
+                <p data-i18n="photos_subtitle">Snapshots from our robotics classes</p>
             </div>
             <div class="video-grid" style="margin-top: 2rem;">
                 <div class="video-card">
@@ -1341,81 +1479,116 @@
                 <p>We'll contact you within 24 hours to confirm your spot.</p>
             </div>
 
-            <h2>Register Your Child</h2>
+            <h2 data-i18n="form_title">Register Your Child</h2>
             <form id="registrationForm" onsubmit="submitForm(event)">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="parentName">Parent/Guardian Name *</label>
+                        <label for="parentName" data-i18n="form_parent_name">Parent/Guardian Name *</label>
                         <input type="text" id="parentName" name="parentName" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number *</label>
+                        <label for="phone" data-i18n="form_phone">Phone Number *</label>
                         <input type="tel" id="phone" name="phone" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email Address *</label>
+                    <label for="email" data-i18n="form_email">Email Address *</label>
                     <input type="email" id="email" name="email" required>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="childName">Child's Name *</label>
-                        <input type="text" id="childName" name="childName" required>
+                        <label for="childFirstName" data-i18n="form_child_first_name">Child's First Name *</label>
+                        <input type="text" id="childFirstName" name="childFirstName" required>
                     </div>
                     <div class="form-group">
-                        <label for="childAge">Child's Age *</label>
+                        <label for="childSurname" data-i18n="form_child_surname">Child's Surname *</label>
+                        <input type="text" id="childSurname" name="childSurname" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="childAge" data-i18n="form_child_age">Child's Age *</label>
                         <input type="number" id="childAge" name="childAge" min="8" max="16" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="childGrade" data-i18n="form_child_grade">Grade/Class *</label>
+                        <select id="childGrade" name="childGrade" required>
+                            <option value="" data-i18n="form_select_grade">-- Select Grade --</option>
+                            <option value="grade3">Grade 3</option>
+                            <option value="grade4">Grade 4</option>
+                            <option value="grade5">Grade 5</option>
+                            <option value="grade6">Grade 6</option>
+                            <option value="grade7">Grade 7</option>
+                            <option value="grade8">Grade 8</option>
+                            <option value="grade9">Grade 9</option>
+                            <option value="grade10">Grade 10</option>
+                            <option value="grade11">Grade 11</option>
+                            <option value="grade12">Grade 12</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="program">Select Program *</label>
+                    <label for="schoolName" data-i18n="form_school_name">School Name *</label>
+                    <input type="text" id="schoolName" name="schoolName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="program" data-i18n="form_program">Select Program *</label>
                     <select id="program" name="program" required>
-                        <option value="">-- Choose a program --</option>
-                        <option value="beginner">Beginner Robotics (Ages 8-11) - R750/month</option>
-                        <option value="advanced">Advanced Robotics (Ages 12-16) - R950/month</option>
-                        <option value="competition">Competition Team (All Ages) - R1,200/month</option>
+                        <option value="" data-i18n="form_choose_program">-- Choose a program --</option>
+                        <option value="beginner" data-i18n="form_program_beginner">Beginner Robotics (Ages 8-11) - R750/month</option>
+                        <option value="advanced" data-i18n="form_program_advanced">Advanced Robotics (Ages 12-16) - R950/month</option>
+                        <option value="competition" data-i18n="form_program_competition">Competition Team (All Ages) - R1,200/month</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="paymentOption">Payment Option *</label>
+                    <label for="paymentOption" data-i18n="form_payment">Payment Option *</label>
                     <select id="paymentOption" name="paymentOption" required>
-                        <option value="">-- Choose payment option --</option>
-                        <option value="monthly">Monthly Payment</option>
-                        <option value="term">Pay Per Term (Save 10%)</option>
+                        <option value="" data-i18n="form_choose_payment">-- Choose payment option --</option>
+                        <option value="monthly" data-i18n="form_payment_monthly">Monthly Payment</option>
+                        <option value="term" data-i18n="form_payment_term">Pay Per Term (Save 10%)</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="experience">Previous Robotics Experience</label>
+                    <label for="experience" data-i18n="form_experience">Previous Robotics Experience</label>
                     <select id="experience" name="experience">
-                        <option value="none">No Experience</option>
-                        <option value="beginner">Some Experience</option>
-                        <option value="intermediate">Competition Experience</option>
+                        <option value="none" data-i18n="form_exp_none">No Experience</option>
+                        <option value="beginner" data-i18n="form_exp_some">Some Experience</option>
+                        <option value="intermediate" data-i18n="form_exp_competition">Competition Experience</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Questions or Special Requests</label>
-                    <textarea id="message" name="message" placeholder="Any allergies, learning needs, or questions we should know about?"></textarea>
+                    <label for="message" data-i18n="form_message">Questions or Special Requests</label>
+                    <textarea id="message" name="message" data-i18n-placeholder="form_message_placeholder" placeholder="Any allergies, learning needs, or questions we should know about?"></textarea>
                 </div>
 
-                <button type="submit" class="form-submit">Complete Registration</button>
-                <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                <button type="submit" class="form-submit" data-i18n="form_submit">Complete Registration</button>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;" data-i18n="form_note">
                     After registration, we'll send payment details via email
                 </p>
             </form>
         </div>
     </div>
 
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/27670810999?text=Hi%20I%20visited%20your%20website%20and%20would%20like%20more%20info" target="_blank" class="whatsapp-float" title="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-brand">
                 <h3>DCJ Training</h3>
-                <p>"Excellentia et Scientia in Computando" — Excellence and knowledge in computing. Building tomorrow's innovators through hands-on LEGO robotics education in Stellenbosch.</p>
+                <p data-i18n="footer_tagline">"Excellentia et Scientia in Computando" — Excellence and knowledge in computing. Building tomorrow's innovators through hands-on LEGO robotics education in Stellenbosch.</p>
                 <div class="social-links">
                     <a href="https://www.facebook.com/profile.php?id=100087896756900" target="_blank" class="social-link" title="Facebook">📘</a>
                     <a href="mailto:hello@dcjtraining.co.za" class="social-link" title="Email">✉️</a>
@@ -1424,31 +1597,311 @@
             </div>
 
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h4 data-i18n="footer_quick_links">Quick Links</h4>
                 <ul>
-                    <li><a href="#pricing">Programs & Pricing</a></li>
-                    <li><a href="#why-us">Why Choose Us</a></li>
-                    <li><a href="#" onclick="openModal(event)">Register Now</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#pricing" data-i18n="footer_link_pricing">Programs & Pricing</a></li>
+                    <li><a href="#why-us" data-i18n="footer_link_why">Why Choose Us</a></li>
+                    <li><a href="#" onclick="openModal(event)" data-i18n="footer_link_register">Register Now</a></li>
+                    <li><a href="#contact" data-i18n="footer_link_contact">Contact Us</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
-                <h4>Contact Info</h4>
+                <h4 data-i18n="footer_contact_info">Contact Info</h4>
                 <ul>
                     <li>📍 Stellenbosch, Western Cape</li>
                     <li>📧 <a href="mailto:hello@dcjtraining.co.za">hello@dcjtraining.co.za</a></li>
                     <li>📱 <a href="tel:+27670810999">067 081 0999</a></li>
-                    <li>🕐 Mon-Fri: 2pm-6pm</li>
+                    <li data-i18n="footer_hours">🕐 Mon-Fri: 2pm-6pm</li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 DCJ Training. All rights reserved. | www.dcjtraining.co.za</p>
+            <p data-i18n="footer_copyright">&copy; 2026 DCJ Training. All rights reserved. | www.dcjtraining.co.za</p>
         </div>
     </footer>
 
     <script>
+        // ===========================================
+        // TRANSLATIONS - Easy to update
+        // ===========================================
+        const translations = {
+            en: {
+                // Navigation
+                nav_pricing: "Pricing",
+                nav_why_us: "Why Us",
+                nav_gallery: "Gallery",
+                nav_contact: "Contact",
+                nav_register: "Register Now",
+
+                // Hero Section
+                hero_location: "Now in Stellenbosch, Western Cape!",
+                hero_title_1: "After-School LEGO Robotics",
+                hero_title_2: "That Kids Actually Love",
+                hero_subtitle: "Transform your child's after-school hours into exciting hands-on learning adventures with coding, robotics, and problem-solving.",
+                hero_feature_1_title: "After-School Classes",
+                hero_feature_1_desc: "Convenient timing for parents",
+                hero_feature_2_title: "Expert Instructors",
+                hero_feature_2_desc: "Passionate & qualified teachers",
+                hero_feature_3_title: "Competition Ready",
+                hero_feature_3_desc: "Train for robotics tournaments",
+                hero_feature_4_title: "Ages 8-16",
+                hero_feature_4_desc: "Beginner to advanced levels",
+                hero_cta_register: "Register Your Child",
+                hero_cta_pricing: "View Pricing",
+
+                // Pricing Section
+                pricing_title: "Choose Your Program",
+                pricing_subtitle: "Flexible pricing for every budget • Pay monthly or save with term rates",
+                pricing_beginner_title: "Beginner Robotics",
+                pricing_beginner_term: "or R2,000 per term (3 months)",
+                pricing_beginner_f1: "2 hours per week",
+                pricing_beginner_f2: "Ages 8-11",
+                pricing_beginner_f3: "Basic programming",
+                pricing_beginner_f5: "Team projects",
+                pricing_beginner_f6: "Max 8 students per class",
+                pricing_beginner_f7: "All equipment included",
+                pricing_advanced_title: "Advanced Robotics",
+                pricing_advanced_term: "or R2,500 per term (3 months)",
+                pricing_advanced_f1: "2.5 hours per week",
+                pricing_advanced_f2: "Ages 12-16",
+                pricing_advanced_f3: "Advanced coding (Python)",
+                pricing_advanced_f5: "Sensors & automation",
+                pricing_advanced_f6: "Competition prep",
+                pricing_advanced_f7: "Project portfolio",
+                pricing_advanced_f8: "Max 6 students per class",
+                pricing_competition_title: "Competition Team",
+                pricing_competition_term: "or R3,200 per term (3 months)",
+                pricing_competition_f1: "3 hours per week",
+                pricing_competition_f2: "All ages (by assessment)",
+                pricing_competition_f3: "Tournament training",
+                pricing_competition_f5: "Presentation skills",
+                pricing_competition_f6: "Team building",
+                pricing_competition_f7: "Competition fees included",
+                pricing_competition_f8: "Weekend sessions available",
+                pricing_popular: "POPULAR",
+                pricing_register: "Register Now",
+                pricing_join: "Join Team",
+
+                // Why Choose Us
+                why_title: "Why Parents Choose DCJ Training",
+                why_subtitle: "More than just robotics—we build confidence, creativity, and critical thinking",
+                why_b1_title: "Proven Results",
+                why_b1_desc: "Our students consistently place in regional competitions and develop real-world STEM skills",
+                why_b2_title: "Small Class Sizes",
+                why_b2_desc: "Maximum 8 students per instructor ensures personalized attention and hands-on learning",
+                why_b3_title: "Professional Equipment",
+                why_b3_desc: "Latest LEGO Education kits including SPIKE Prime and Mindstorms EV3",
+                why_b4_title: "Flexible Scheduling",
+                why_b4_desc: "Multiple after-school time slots to fit your family's busy schedule",
+                why_b5_title: "Qualified Instructors",
+                why_b5_desc: "Teachers with STEM backgrounds and passion for youth development",
+                why_b6_title: "Project-Based Learning",
+                why_b6_desc: "Students create real projects they're proud of, not just follow instructions",
+
+                // Gallery
+                gallery_title: "See Our Students in Action",
+                gallery_subtitle: "Watch our young robotics enthusiasts learn, build, and compete",
+                photos_title: "Photo Gallery",
+                photos_subtitle: "Snapshots from our robotics classes",
+
+                // Registration Form
+                form_title: "Register Your Child",
+                form_parent_name: "Parent/Guardian Name *",
+                form_phone: "Phone Number *",
+                form_email: "Email Address *",
+                form_child_first_name: "Child's First Name *",
+                form_child_surname: "Child's Surname *",
+                form_child_age: "Child's Age *",
+                form_child_grade: "Grade/Class *",
+                form_select_grade: "-- Select Grade --",
+                form_school_name: "School Name *",
+                form_program: "Select Program *",
+                form_choose_program: "-- Choose a program --",
+                form_program_beginner: "Beginner Robotics (Ages 8-11) - R750/month",
+                form_program_advanced: "Advanced Robotics (Ages 12-16) - R950/month",
+                form_program_competition: "Competition Team (All Ages) - R1,200/month",
+                form_payment: "Payment Option *",
+                form_choose_payment: "-- Choose payment option --",
+                form_payment_monthly: "Monthly Payment",
+                form_payment_term: "Pay Per Term (Save 10%)",
+                form_experience: "Previous Robotics Experience",
+                form_exp_none: "No Experience",
+                form_exp_some: "Some Experience",
+                form_exp_competition: "Competition Experience",
+                form_message: "Questions or Special Requests",
+                form_message_placeholder: "Any allergies, learning needs, or questions we should know about?",
+                form_submit: "Complete Registration",
+                form_note: "After registration, we'll send payment details via email",
+
+                // Footer
+                footer_tagline: '"Excellentia et Scientia in Computando" — Excellence and knowledge in computing. Building tomorrow\'s innovators through hands-on LEGO robotics education in Stellenbosch.',
+                footer_quick_links: "Quick Links",
+                footer_link_pricing: "Programs & Pricing",
+                footer_link_why: "Why Choose Us",
+                footer_link_register: "Register Now",
+                footer_link_contact: "Contact Us",
+                footer_contact_info: "Contact Info",
+                footer_hours: "🕐 Mon-Fri: 2pm-6pm",
+                footer_copyright: "© 2026 DCJ Training. All rights reserved. | www.dcjtraining.co.za"
+            },
+            af: {
+                // Navigation
+                nav_pricing: "Pryse",
+                nav_why_us: "Hoekom Ons",
+                nav_gallery: "Galery",
+                nav_contact: "Kontak",
+                nav_register: "Registreer Nou",
+
+                // Hero Section
+                hero_location: "Nou in Stellenbosch, Wes-Kaap!",
+                hero_title_1: "Na-skoolse LEGO Robotika",
+                hero_title_2: "Wat Kinders Regtig Geniet",
+                hero_subtitle: "Verander jou kind se na-skoolse ure in opwindende praktiese leeravonture met kodering, robotika en probleemoplossing.",
+                hero_feature_1_title: "Na-skoolse Klasse",
+                hero_feature_1_desc: "Gerieflike tye vir ouers",
+                hero_feature_2_title: "Kundige Instrukteurs",
+                hero_feature_2_desc: "Passievolle & gekwalifiseerde onderwysers",
+                hero_feature_3_title: "Kompetisie-gereed",
+                hero_feature_3_desc: "Opleiding vir robotika-toernooie",
+                hero_feature_4_title: "Ouderdomme 8-16",
+                hero_feature_4_desc: "Beginner tot gevorderde vlakke",
+                hero_cta_register: "Registreer Jou Kind",
+                hero_cta_pricing: "Bekyk Pryse",
+
+                // Pricing Section
+                pricing_title: "Kies Jou Program",
+                pricing_subtitle: "Buigsame pryse vir elke begroting • Betaal maandeliks of spaar met kwartaaltariewe",
+                pricing_beginner_title: "Beginner Robotika",
+                pricing_beginner_term: "of R2,000 per kwartaal (3 maande)",
+                pricing_beginner_f1: "2 ure per week",
+                pricing_beginner_f2: "Ouderdomme 8-11",
+                pricing_beginner_f3: "Basiese programmering",
+                pricing_beginner_f5: "Spanprojekte",
+                pricing_beginner_f6: "Maks 8 studente per klas",
+                pricing_beginner_f7: "Alle toerusting ingesluit",
+                pricing_advanced_title: "Gevorderde Robotika",
+                pricing_advanced_term: "of R2,500 per kwartaal (3 maande)",
+                pricing_advanced_f1: "2.5 ure per week",
+                pricing_advanced_f2: "Ouderdomme 12-16",
+                pricing_advanced_f3: "Gevorderde kodering (Python)",
+                pricing_advanced_f5: "Sensors & outomatisering",
+                pricing_advanced_f6: "Kompetisie-voorbereiding",
+                pricing_advanced_f7: "Projek-portefeulje",
+                pricing_advanced_f8: "Maks 6 studente per klas",
+                pricing_competition_title: "Kompetisiespan",
+                pricing_competition_term: "of R3,200 per kwartaal (3 maande)",
+                pricing_competition_f1: "3 ure per week",
+                pricing_competition_f2: "Alle ouderdomme (per assessering)",
+                pricing_competition_f3: "Toernooi-opleiding",
+                pricing_competition_f5: "Aanbiedingsvaardighede",
+                pricing_competition_f6: "Spanbou",
+                pricing_competition_f7: "Kompetisiegelde ingesluit",
+                pricing_competition_f8: "Naweekaansessies beskikbaar",
+                pricing_popular: "GEWILD",
+                pricing_register: "Registreer Nou",
+                pricing_join: "Sluit Aan",
+
+                // Why Choose Us
+                why_title: "Hoekom Ouers DCJ Training Kies",
+                why_subtitle: "Meer as net robotika—ons bou selfvertroue, kreatiwiteit en kritiese denke",
+                why_b1_title: "Bewese Resultate",
+                why_b1_desc: "Ons studente behaal konsekwent plekke in streekskompetisies en ontwikkel werklike STEM-vaardighede",
+                why_b2_title: "Klein Klasgroottes",
+                why_b2_desc: "Maksimum 8 studente per instrukteur verseker persoonlike aandag en praktiese leer",
+                why_b3_title: "Professionele Toerusting",
+                why_b3_desc: "Nuutste LEGO Education-stelle insluitend SPIKE Prime en Mindstorms EV3",
+                why_b4_title: "Buigsame Skedulering",
+                why_b4_desc: "Verskeie na-skoolse tydgleuwe om by jou gesin se besige skedule te pas",
+                why_b5_title: "Gekwalifiseerde Instrukteurs",
+                why_b5_desc: "Onderwysers met STEM-agtergronde en passie vir jeugontwikkeling",
+                why_b6_title: "Projek-gebaseerde Leer",
+                why_b6_desc: "Studente skep werklike projekte waarop hulle trots is, nie net volg instruksies nie",
+
+                // Gallery
+                gallery_title: "Sien Ons Studente in Aksie",
+                gallery_subtitle: "Kyk hoe ons jong robotika-entoesiaste leer, bou en kompeteer",
+                photos_title: "Foto-galery",
+                photos_subtitle: "Kiekies van ons robotika-klasse",
+
+                // Registration Form
+                form_title: "Registreer Jou Kind",
+                form_parent_name: "Ouer/Voog Naam *",
+                form_phone: "Telefoonnommer *",
+                form_email: "E-posadres *",
+                form_child_first_name: "Kind se Voornaam *",
+                form_child_surname: "Kind se Van *",
+                form_child_age: "Kind se Ouderdom *",
+                form_child_grade: "Graad/Klas *",
+                form_select_grade: "-- Kies Graad --",
+                form_school_name: "Skoolnaam *",
+                form_program: "Kies Program *",
+                form_choose_program: "-- Kies 'n program --",
+                form_program_beginner: "Beginner Robotika (Ouderdomme 8-11) - R750/maand",
+                form_program_advanced: "Gevorderde Robotika (Ouderdomme 12-16) - R950/maand",
+                form_program_competition: "Kompetisiespan (Alle Ouderdomme) - R1,200/maand",
+                form_payment: "Betaalopsie *",
+                form_choose_payment: "-- Kies betaalopsie --",
+                form_payment_monthly: "Maandelikse Betaling",
+                form_payment_term: "Betaal Per Kwartaal (Spaar 10%)",
+                form_experience: "Vorige Robotika-ervaring",
+                form_exp_none: "Geen Ervaring",
+                form_exp_some: "Bietjie Ervaring",
+                form_exp_competition: "Kompetisie-ervaring",
+                form_message: "Vrae of Spesiale Versoeke",
+                form_message_placeholder: "Enige allergieë, leerbehoeftes, of vrae waarvan ons moet weet?",
+                form_submit: "Voltooi Registrasie",
+                form_note: "Na registrasie sal ons betaalbesonderhede per e-pos stuur",
+
+                // Footer
+                footer_tagline: '"Excellentia et Scientia in Computando" — Uitnemendheid en kennis in rekenaarkunde. Ons bou môre se innoveerders deur praktiese LEGO robotika-onderrig in Stellenbosch.',
+                footer_quick_links: "Vinnige Skakels",
+                footer_link_pricing: "Programme & Pryse",
+                footer_link_why: "Hoekom Ons Kies",
+                footer_link_register: "Registreer Nou",
+                footer_link_contact: "Kontak Ons",
+                footer_contact_info: "Kontakbesonderhede",
+                footer_hours: "🕐 Ma-Vr: 2nm-6nm",
+                footer_copyright: "© 2026 DCJ Training. Alle regte voorbehou. | www.dcjtraining.co.za"
+            }
+        };
+
+        // Current language state
+        let currentLang = 'en';
+
+        // Toggle language function
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'af' : 'en';
+            document.getElementById('langLabel').textContent = currentLang === 'en' ? 'AF' : 'EN';
+            applyTranslations();
+            localStorage.setItem('dcj-lang', currentLang);
+        }
+
+        // Apply translations to all elements with data-i18n attribute
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+            // Handle placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[currentLang][key]) {
+                    el.placeholder = translations[currentLang][key];
+                }
+            });
+        }
+
+        // Load saved language preference
+        const savedLang = localStorage.getItem('dcj-lang');
+        if (savedLang) {
+            currentLang = savedLang;
+            document.getElementById('langLabel').textContent = currentLang === 'en' ? 'AF' : 'EN';
+            applyTranslations();
+        }
+
         // Generate floating LEGO studs in background
         const legoBg = document.getElementById('legoBg');
         for (let i = 0; i < 20; i++) {
@@ -1467,7 +1920,7 @@
             const modal = document.getElementById('registrationModal');
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            
+
             if (program) {
                 const select = document.getElementById('program');
                 const option = Array.from(select.options).find(opt => opt.text.includes(program));
@@ -1547,7 +2000,7 @@
                 const centerY = rect.height / 2;
                 const rotateX = (y - centerY) / 15;
                 const rotateY = (centerX - x) / 15;
-                
+
                 brick.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
             });
 
